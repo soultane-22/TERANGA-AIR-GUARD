@@ -23,7 +23,7 @@ export default function Chatbot() {
 
       let liveContext = "Données en temps réel indisponibles pour le moment.";
       try {
-        const res = await axios.get('http://localhost:8000/api/dashboard-stats');
+        const res = await axios.get('https://teranga-air-guard.onrender.com/api/dashboard-stats');
         const data = res.data;
         
         if (data && data.weather && data.latest_by_zone) {

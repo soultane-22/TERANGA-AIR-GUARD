@@ -156,7 +156,7 @@ export default function App() {
         </div>
 
         <div className="mt-auto p-4 border-t border-slate-800/50 space-y-2">
-          <button onClick={() => window.open('http://localhost:8000/api/export-excel', '_blank')} className="w-full flex items-center p-3.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 rounded-xl transition-all group">
+          <button onClick={() => window.open('https://teranga-air-guard.onrender.com/api/export-excel', '_blank')} className="w-full flex items-center p-3.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 rounded-xl transition-all group">
             <FileDown size={22} className="group-hover:-translate-y-1 transition-transform" />
             {isSidebarOpen && <span className="ml-4 font-bold text-sm">Export Data</span>}
           </button>
@@ -233,7 +233,7 @@ function PredictionsView() {
     const [selectedZone, setSelectedZone] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/dashboard-stats').then(res => {
+        axios.get('https://teranga-air-guard.onrender.com/api/dashboard-stats').then(res => {
             setStats(res.data);
             const zones = Object.keys(res.data.predictions_by_zone || {});
             if (zones.length > 0 && !selectedZone) setSelectedZone(zones[0]);
@@ -325,7 +325,7 @@ function RecommendationsView() {
     const [selectedZone, setSelectedZone] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/dashboard-stats').then(res => {
+        axios.get('https://teranga-air-guard.onrender.com/api/dashboard-stats').then(res => {
             setStats(res.data);
             const zones = Object.keys(res.data.recos_by_zone || {});
             if (zones.length > 0 && !selectedZone) setSelectedZone(zones[0]);
@@ -380,7 +380,7 @@ function MapView() {
     useEffect(() => {
         const fetchMapData = async () => {
             try {
-                const res = await axios.get('http://localhost:8000/api/map-sensors');
+                const res = await axios.get('https://teranga-air-guard.onrender.com/api/map-sensors');
                 setSensors(res.data);
             } catch (e) { console.error(e); }
         };
@@ -438,7 +438,7 @@ function AlertsList() {
     const [stats, setStats] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/dashboard-stats').then(res => setStats(res.data)).catch(console.error);
+        axios.get('https://teranga-air-guard.onrender.com/api/dashboard-stats').then(res => setStats(res.data)).catch(console.error);
     }, []);
 
     if (!stats) return <div className="text-blue-600 font-bold animate-pulse">Vérification des protocoles de sécurité...</div>;
@@ -494,7 +494,7 @@ function HistoryView() {
     const [endDate, setEndDate] = useState('');
     const [selectedZone, setSelectedZone] = useState('');
     
-    useEffect(() => { axios.get('http://localhost:8000/api/history').then(res => setHistoryData(res.data)).catch(console.error); }, []);
+    useEffect(() => { axios.get('https://teranga-air-guard.onrender.com/api/history').then(res => setHistoryData(res.data)).catch(console.error); }, []);
     
     const filteredData = historyData.filter(row => {
         if (startDate && row.date < startDate) return false;
@@ -514,7 +514,7 @@ function HistoryView() {
         if (startDate) params.append('start_date', startDate);
         if (endDate) params.append('end_date', endDate);
         if (selectedZone) params.append('zone', selectedZone);
-        window.open(`http://localhost:8000/api/export-excel?${params.toString()}`, '_blank');
+        window.open(`https://teranga-air-guard.onrender.com/api/export-excel?${params.toString()}`, '_blank');
     };
 
     const uniqueZones = [...new Set(historyData.map(item => item.sensor_id))];
@@ -583,7 +583,7 @@ function HistoryView() {
 // ==========================================
 function DeviceManagementView() {
     const [stats, setStats] = useState(null);
-    useEffect(() => { axios.get('http://localhost:8000/api/dashboard-stats').then(res => setStats(res.data)).catch(console.error); }, []);
+    useEffect(() => { axios.get('https://teranga-air-guard.onrender.com/api/dashboard-stats').then(res => setStats(res.data)).catch(console.error); }, []);
 
     if (!stats) return <div className="text-blue-600 font-bold animate-pulse">Scan du réseau en cours...</div>;
     const devices = stats.latest_by_zone || [];
@@ -693,7 +693,7 @@ function SystemHealthView() {
     // Va chercher les vraies données toutes les 60 secondes (au lieu de 5 !)
     useEffect(() => {
         const fetchHealth = () => {
-            axios.get('http://localhost:8000/api/system-health')
+            axios.get('https://teranga-air-guard.onrender.com/api/system-health')
                 .then(res => setHealth(res.data))
                 .catch(console.error);
         };
