@@ -111,7 +111,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('https://teranga-air-guard.onrender.com/api/dashboard-stats');
+        const res = await axios.get('http://13.61.185.172:8000/api/dashboard-stats');
         setData(res.data);
         if (res.data && res.data.history) {
             const availableZones = Object.keys(res.data.history);

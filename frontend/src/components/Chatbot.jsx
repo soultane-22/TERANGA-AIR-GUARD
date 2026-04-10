@@ -23,7 +23,7 @@ export default function Chatbot() {
 
       let liveContext = "Données en temps réel indisponibles pour le moment.";
       try {
-        const res = await axios.get('https://teranga-air-guard.onrender.com/api/dashboard-stats');
+        const res = await axios.get('http://13.61.185.172:8000/api/dashboard-stats');
         const data = res.data;
         
         if (data && data.weather && data.latest_by_zone) {
@@ -99,7 +99,7 @@ export default function Chatbot() {
                   <Bot size={28} className="text-white" />
                 </div>
                 <div>
-                  <h3 className="font-black text-xl tracking-wide">KAIKAI Air-Bot</h3>
+                  <h3 className="font-black text-xl tracking-wide"> AIR-GUARD Air-Bot</h3>
                   <p className="text-xs font-bold text-blue-200 uppercase tracking-wider flex items-center gap-2 mt-1">
                     <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]"></span> Données Live Actives
                   </p>
@@ -119,7 +119,7 @@ export default function Chatbot() {
             
             {isTyping && (
                 <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 self-start rounded-3xl rounded-tl-none p-5 shadow-sm w-fit flex items-center gap-4 text-base font-bold">
-                    <Loader2 size={24} className="animate-spin text-blue-600" /> KAIKAI analyse le réseau...
+                    <Loader2 size={24} className="animate-spin text-blue-600" /> AIR-GUARD analyse le réseau...
                 </div>
             )}
             <div ref={messagesEndRef} />
